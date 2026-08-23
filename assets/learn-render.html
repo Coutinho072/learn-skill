@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>learn skill assets</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #222; display: grid; gap: 40px; padding: 40px; justify-items: start; }
+  #cover { width: 1600px; height: 900px; }
+  #diagram { background: #0E0E13; padding: 48px; border-radius: 0; width: max-content; }
+  #diagram svg { display: block; }
+</style>
+</head>
+<body>
+
+<!-- ══════════ COVER ══════════ -->
+<svg id="cover" viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="goalGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E8B44F" stop-opacity="0.55"/>
+      <stop offset="45%" stop-color="#E8B44F" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#E8B44F" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="currentGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E8B44F" stop-opacity="0.7"/>
+      <stop offset="60%" stop-color="#E8B44F" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#E8B44F" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="30%" cy="35%" r="90%">
+      <stop offset="0%" stop-color="#16161F"/>
+      <stop offset="100%" stop-color="#0A0A0F"/>
+    </radialGradient>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.1"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#vignette)"/>
+
+  <!-- starfield -->
+  <g fill="#ECECF1" opacity="0.5">
+    <circle cx="140" cy="120" r="1.1"/><circle cx="320" cy="740" r="1.4"/><circle cx="512" cy="180" r="0.9"/>
+    <circle cx="705" cy="90" r="1.2"/><circle cx="905" cy="820" r="1.0"/><circle cx="1090" cy="140" r="1.3"/>
+    <circle cx="1240" cy="700" r="0.9"/><circle cx="1420" cy="220" r="1.1"/><circle cx="1530" cy="560" r="1.3"/>
+    <circle cx="240" cy="420" r="0.8"/><circle cx="60" cy="620" r="1.0"/><circle cx="820" cy="300" r="0.8"/>
+    <circle cx="1330" cy="90" r="0.9"/><circle cx="1490" cy="840" r="1.2"/><circle cx="640" cy="850" r="0.9"/>
+    <circle cx="1010" cy="470" r="0.8"/><circle cx="380" cy="60" r="1.0"/><circle cx="1570" cy="380" r="0.9"/>
+  </g>
+
+  <!-- constellation DAG: probe edge → goal -->
+  <g stroke-linecap="round">
+    <!-- edges -->
+    <g stroke="#3FB27F" stroke-width="2" opacity="0.85">
+      <path d="M 880 700 L 990 610" fill="none"/>
+      <path d="M 990 610 L 1080 660" fill="none"/>
+      <path d="M 990 610 L 1105 520" fill="none"/>
+      <path d="M 1080 660 L 1185 585" fill="none"/>
+    </g>
+    <g stroke="#57576A" stroke-width="1.6" stroke-dasharray="5 7" opacity="0.9">
+      <path d="M 1105 520 L 1230 455" fill="none"/>
+      <path d="M 1185 585 L 1230 455" fill="none"/>
+      <path d="M 1230 455 L 1330 350" fill="none"/>
+      <path d="M 1330 350 L 1415 245" fill="none"/>
+    </g>
+
+    <!-- done nodes (verified) -->
+    <g>
+      <circle cx="880" cy="700" r="11" fill="#3FB27F"/>
+      <circle cx="990" cy="610" r="11" fill="#3FB27F"/>
+      <circle cx="1080" cy="660" r="11" fill="#3FB27F"/>
+      <!-- check marks -->
+      <g stroke="#0E0E13" stroke-width="2.4" fill="none">
+        <path d="M 874.5 700 l 3.6 3.8 l 7 -7.2"/>
+        <path d="M 984.5 610 l 3.6 3.8 l 7 -7.2"/>
+        <path d="M 1074.5 660 l 3.6 3.8 l 7 -7.2"/>
+      </g>
+    </g>
+
+    <!-- current node (glowing) -->
+    <circle cx="1105" cy="520" r="90" fill="url(#currentGlow)"/>
+    <circle cx="1105" cy="520" r="13" fill="#E8B44F"/>
+    <circle cx="1105" cy="520" r="21" fill="none" stroke="#E8B44F" stroke-width="1.4" opacity="0.65"/>
+
+    <!-- todo nodes -->
+    <g fill="#0E0E13" stroke="#8B8B9E" stroke-width="1.8">
+      <circle cx="1185" cy="585" r="9"/>
+      <circle cx="1230" cy="455" r="9"/>
+      <circle cx="1330" cy="350" r="9"/>
+    </g>
+
+    <!-- goal star -->
+    <circle cx="1415" cy="245" r="150" fill="url(#goalGlow)"/>
+    <g fill="#E8B44F">
+      <path d="M 1415 215 L 1423 237 L 1445 245 L 1423 253 L 1415 275 L 1407 253 L 1385 245 L 1407 237 Z"/>
+    </g>
+  </g>
+
+  <!-- node labels -->
+  <g font-family="'JetBrains Mono', monospace" font-size="13" fill="#8B8B9E">
+    <text x="880" y="738" text-anchor="middle">verified</text>
+    <text x="1105" y="486" text-anchor="middle" fill="#E8B44F">teaching now</text>
+    <text x="1415" y="310" text-anchor="middle" fill="#D9BE85">your goal</text>
+    <text x="812" y="704" text-anchor="end" opacity="0.75">the edge of what</text>
+    <text x="812" y="722" text-anchor="end" opacity="0.75">you already know</text>
+  </g>
+
+  <!-- title block -->
+  <g>
+    <text x="96" y="180" font-family="'JetBrains Mono', monospace" font-size="15" letter-spacing="4" fill="#8B8B9E">A SKILL FOR CODING AGENTS</text>
+    <text x="88" y="330" font-family="'Instrument Serif', serif" font-size="200" fill="#ECECF1">learn<tspan fill="#E8B44F">.</tspan></text>
+    <text x="96" y="416" font-family="'Instrument Serif', serif" font-style="italic" font-size="42" fill="#C9C9D6">A tutor that proves what it teaches,</text>
+    <text x="96" y="470" font-family="'Instrument Serif', serif" font-style="italic" font-size="42" fill="#C9C9D6">one reasoning step at a time.</text>
+  </g>
+
+  <!-- feature ledger -->
+  <g font-family="'Instrument Sans', sans-serif" font-size="19" fill="#A8A8B8">
+    <g>
+      <line x1="96" y1="560" x2="620" y2="560" stroke="#26262F" stroke-width="1"/>
+      <text x="96" y="600" fill="#ECECF1" font-weight="600">Probes the edge</text>
+      <text x="96" y="628">Adaptive questions find where your knowledge ends,</text>
+      <text x="96" y="654">then a dependency map is planned from there to the goal.</text>
+    </g>
+    <g>
+      <line x1="96" y1="700" x2="620" y2="700" stroke="#26262F" stroke-width="1"/>
+      <text x="96" y="740" fill="#ECECF1" font-weight="600">Fact-checked before it reaches you</text>
+      <text x="96" y="768">Every lesson is verified against sources first.</text>
+      <text x="96" y="794">Misses become Anki cards, pushed into your deck.</text>
+    </g>
+  </g>
+
+  <!-- keyless badge -->
+  <g>
+    <rect x="1210" y="800" rx="21" ry="21" width="294" height="42" fill="none" stroke="#3FB27F" stroke-width="1.4"/>
+    <circle cx="1238" cy="821" r="5" fill="#3FB27F"/>
+    <text x="1256" y="827" font-family="'JetBrains Mono', monospace" font-size="15" fill="#3FB27F">no LLM API keys needed</text>
+  </g>
+
+  <!-- footer -->
+  <g font-family="'JetBrains Mono', monospace" font-size="13" fill="#57576A">
+    <text x="96" y="852">terminal is the engine · your notes app is the classroom · Anki is the memory</text>
+  </g>
+</svg>
+
+<!-- ══════════ MERMAID ══════════ -->
+<div id="diagram">
+  <pre class="mermaid" id="mmd-src"></pre>
+</div>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  const src = await (await fetch('./learn-skill.mmd')).text();
+  document.getElementById('mmd-src').textContent = src;
+  mermaid.initialize({ startOnLoad: false });
+  await mermaid.run({ nodes: [document.getElementById('mmd-src')] });
+  document.title = 'RENDERED';
+</script>
+</body>
+</html>

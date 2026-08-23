@@ -1,0 +1,78 @@
+%%{init: {
+  "theme": "base",
+  "themeVariables": {
+    "background": "#0E0E13",
+    "primaryColor": "#1A1A22",
+    "primaryTextColor": "#ECECF1",
+    "primaryBorderColor": "#34343F",
+    "lineColor": "#7A7A8C",
+    "clusterBkg": "#14141B",
+    "clusterBorder": "#26262F",
+    "edgeLabelBackground": "#14141B",
+    "fontFamily": "Instrument Sans, Segoe UI, sans-serif",
+    "fontSize": "14px"
+  },
+  "flowchart": { "curve": "basis", "htmlLabels": true }
+}}%%
+graph TD
+
+  subgraph SETUP["SETUP"]
+    A(["/learn &lt;topic&gt;"]) --> B["Learner profile<br/><i>persistent model of what he knows</i>"]
+    B --> C["Goal interview<br/><i>one-sentence goal + scope + Anki deck</i>"]
+  end
+
+  C --> P
+
+  subgraph PROBE["PROBE - find the edge of knowledge"]
+    P["6-12 adaptive multiple-choice questions<br/><i>binary-searching each dependency strand</i><br/><i>'I don't know' is always an option</i>"]
+  end
+
+  P --> R1 & F1
+
+  subgraph PLAN["PLAN - two agents in parallel"]
+    R1["deep-research agent<br/><i>canonical sequence, pitfalls, sources</i>"]
+    F1["fact-checker<br/><i>verdict on the topic's core claims</i>"]
+    R1 --> DAG
+    F1 --> DAG
+    DAG{{"Dependency DAG<br/><b>5-12 nodes, one reasoning step each</b><br/><i>from the probed edge to the goal</i>"}}
+    DAG --> OK["Plan approval<br/><i>start / adjust / change goal</i>"]
+  end
+
+  OK --> T1
+
+  subgraph LOOP["TEACH LOOP - node N"]
+    T1["Apply fact-check verdicts to draft N<br/><i>corrections in, weak claims softened or dropped</i>"]
+    T1 --> T2["Publish node N to Obsidian<br/><i>lesson + code-drawn visual + verification note</i>"]
+    T2 -.->|"background, while he reads"| PF["Prefetch N+1<br/><i>draft + delta fact-check + visual</i>"]
+    T2 --> Q["Quiz node N<br/><i>immediate feedback, honest grading</i>"]
+    Q --> AN["Anki cards<br/><i>for every miss and critical fact,<br/>pushed straight into the deck</i>"]
+    AN --> CK["Checkpoint<br/><i>continue / go deeper / pause</i>"]
+    CK --> G{"GATE<br/>N+1 verdict arrived<br/>and applied?"}
+    PF -.-> G
+    G -->|"verified - next node"| T1
+  end
+
+  G -->|"no nodes left"| E
+
+  subgraph ENDR["END RITUAL"]
+    E["Update learner model<br/><i>gaps seen, what stuck, preferences</i><br/>+ session summary and next-topic teaser"]
+  end
+
+  INV["<b>The invariant</b><br/>Nothing reaches the learner<br/>before its fact-check verdict is applied.<br/>A plan change voids every prefetch."]
+  KEY["<b>No API keys</b><br/>Runs entirely inside the coding agent.<br/>Fact-checks via web search.<br/>Visuals drawn as code: SVG and mermaid."]
+
+  INV -.- LOOP
+  KEY -.- PLAN
+
+  classDef default fill:#1A1A22,stroke:#34343F,color:#ECECF1
+  classDef gold fill:#2A2214,stroke:#E8B44F,color:#F5E3BD
+  classDef green fill:#12251C,stroke:#3FB27F,color:#C9EDDC
+  classDef gate fill:#E8B44F,stroke:#E8B44F,color:#1A1508
+  classDef note fill:#14141B,stroke:#26262F,color:#A8A8B8,stroke-dasharray:4 4
+  classDef entry fill:#ECECF1,stroke:#ECECF1,color:#0E0E13
+
+  class A entry
+  class DAG gold
+  class G gate
+  class T2,AN green
+  class INV,KEY note
