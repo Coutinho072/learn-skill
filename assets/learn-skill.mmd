@@ -18,7 +18,7 @@ graph TD
 
   subgraph SETUP["SETUP"]
     A(["/learn &lt;topic&gt;"]) --> B["Learner profile<br/><i>persistent model of what he knows</i>"]
-    B --> C["Goal interview<br/><i>one-sentence goal + scope + Anki deck</i>"]
+    B --> C["Goal interview<br/><i>one-sentence goal + scope + Anki deck</i><br/><i>optional base material (book PDF):<br/>material-only or cross-check</i>"]
   end
 
   C --> P
@@ -31,7 +31,7 @@ graph TD
 
   subgraph PLAN["PLAN - two agents in parallel"]
     R1["deep-research agent<br/><i>canonical sequence, pitfalls, sources</i>"]
-    F1["fact-checker<br/><i>verdict on the topic's core claims</i>"]
+    F1["fact-checker<br/><i>verdict on the topic's core claims</i><br/><i>web sources, or your book alone<br/>in material-only mode</i>"]
     R1 --> DAG
     F1 --> DAG
     DAG{{"Dependency DAG<br/><b>5-12 nodes, one reasoning step each</b><br/><i>from the probed edge to the goal</i>"}}
@@ -59,7 +59,7 @@ graph TD
   end
 
   INV["<b>The invariant</b><br/>Nothing reaches the learner<br/>before its fact-check verdict is applied.<br/>A plan change voids every prefetch."]
-  KEY["<b>No API keys</b><br/>Runs entirely inside the coding agent.<br/>Fact-checks via web search.<br/>Visuals drawn as code: SVG and mermaid."]
+  KEY["<b>No API keys</b><br/>Runs entirely inside the coding agent.<br/>Fact-checks via web search,<br/>or via your own material.<br/>Visuals drawn as code: SVG and mermaid."]
 
   INV -.- LOOP
   KEY -.- PLAN
