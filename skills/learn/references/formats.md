@@ -54,11 +54,18 @@ graph TD
 > `N confirmadas, M corrigidas, K incertas` na verificação inicial.
 > - <only corrected/uncertain claims listed, each with source link>
 
+## Fontes
+
+- [<título>](<url>) — use para: <one line, when to reach for it>
+- <2-5 entries, highest-trust first; prune when a better source appears>
+
 ## N1 — <Título do nó>
 
 <node content: motivação → formalização → exemplo. LaTeX in $...$ / $$...$$.>
 
 ![[<asset-filename>]]
+
+**Fonte primária:** [<título>](<url>) — <one line: why this is THE thing to read on this node. Optional: only when a high-trust source covers the node.>
 
 > [!check]- Verificação: X afirmações, Y confirmadas, Z corrigidas
 > - <corrected claim> → <fix>. Fonte: <url>
@@ -101,6 +108,7 @@ updated: YYYY-MM-DD
 - Borda: <...>
 - Equívocos vistos: <...>
 - Fixou bem: <...>
+- Visto sem evidência: <taught but never quizzed correctly; retest in the next warm-up>
 ```
 
 Update cadence: only at pause or session end (the session.md quiz log is the write-ahead record).
