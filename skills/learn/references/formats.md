@@ -91,13 +91,13 @@ anki_deck_prefix: Learn
 updated: YYYY-MM-DD
 ---
 
-# Learner model — Marcos Coutinho
+# Learner model — <learner name>
 
 ## Background
-- Médico (UFMG), Product Manager na Telepatia AI (IA em saúde).
-- MBA em IA para negócios. Programação limitada: não assumir base de engenharia.
-- Forte em: raciocínio clínico, produto, negócios. Aprende bem com analogias clínicas.
-- Idioma: PT-BR sempre. Conteúdo médico sempre PT-BR.
+- <profession and domain, e.g. clinician, engineer, designer>
+- <base knowledge to assume or not, e.g. limited programming background>
+- <strengths, and which analogies or framings land well>
+- <language preference for sessions and content>
 
 ## Preferências observadas
 - <appended over time: pacing, question style, what makes things click>
@@ -136,7 +136,7 @@ Cards are delivered twice in the same edit burst:
    `type` uses the names from learner-model frontmatter (`anki_basic`, `anki_cloze`). Deck comes from session frontmatter `deck:` (master deck `Learn`, one subdeck per macro-topic). JSON fields are plain text (no HTML escaping; that is a .txt-file concern only).
    `image` is optional: AnkiConnect copies the file into the media collection and injects `<img>` into Back (Basic) or Back Extra (Cloze) by default; pass `"fields": ["Front"]` only for identification cards ("o que é isto?"). PNG only for mobile compatibility: render the node's SVG first (`/opt/homebrew/bin/rsvg-convert -o out.png in.svg`); AI-generated images are already PNG. Filename must be unique and stable: `learn-<slug>-<node>-<n>.png`.
 
-2. **Record (fallback):** append the same cards to `learn/anki/<topic-slug>.txt` in the import format below. This file is the durable record in the vault. If the push fails, Marcos drags this file into Anki; re-import is duplicate-safe. Cards with images: put `<br><img src="learn-<slug>-<node>-<n>.png">` in the same field in the .txt line. The `<img>` resolves only if the media reached Anki via a push (file import never copies media); a fully offline session degrades to text-only cards on import, which is acceptable.
+2. **Record (fallback):** append the same cards to `learn/anki/<topic-slug>.txt` in the import format below. This file is the durable record in the vault. If the push fails, the learner drags this file into Anki; re-import is duplicate-safe. Cards with images: put `<br><img src="learn-<slug>-<node>-<n>.png">` in the same field in the .txt line. The `<img>` resolves only if the media reached Anki via a push (file import never copies media); a fully offline session degrades to text-only cards on import, which is acceptable.
 
 ## Anki .txt import format (verified against the Anki manual)
 
